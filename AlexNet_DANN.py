@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
-from .utils import load_state_dict_from_url
+from torch.autograd import Function
+import torchvision
+from torchvision.models.utils import load_state_dict_from_url
 
 
 __all__ = ['AlexNet', 'alexnet']
@@ -73,7 +75,7 @@ class AlexNet(nn.Module):
             x = self.avgpool(x)
             x = torch.flatten(x, 1)
             x = self.classifier(x)
-         if alpha in not None:
+        else:
             x = self.features(x)
             x = self.avgpool(x)
             x = torch.flatten(x, 1)
