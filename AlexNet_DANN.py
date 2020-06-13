@@ -81,7 +81,7 @@ class AlexNet(nn.Module):
             x = self.avgpool(x)
             x = torch.flatten(x, 1)
             # gradient reversal layer (backward gradients will be reversed)
-            x = ReverseLayerF.apply(features, self.alpha)
+            x = ReverseLayerF.apply(x, self.alpha)
             x = self.dann_classifier(x)
             
         return x
