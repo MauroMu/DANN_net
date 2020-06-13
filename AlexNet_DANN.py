@@ -71,7 +71,7 @@ class AlexNet(nn.Module):
         )
 
     def forward(self, x):
-        if alpha is None:
+        if self.alpha is None:
             x = self.features(x)
             x = self.avgpool(x)
             x = torch.flatten(x, 1)
