@@ -33,6 +33,7 @@ class AlexNet(nn.Module):
 
     def __init__(self, alpha = None, num_classes=1000):
         super(AlexNet, self).__init__()
+        self.alpha = alpha
         self.features = nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=11, stride=4, padding=2),
             nn.ReLU(inplace=True),
@@ -80,7 +81,7 @@ class AlexNet(nn.Module):
             x = self.avgpool(x)
             x = torch.flatten(x, 1)
             # gradient reversal layer (backward gradients will be reversed)
-            x = ReverseLayerF.apply(features, alpha)
+            x = ReverseLayerF.apply(features, self.alpha)
             x = self.dann_classifier(x)
             
         return x
